@@ -25,6 +25,8 @@
     <h1 th:text="${title}" class="text-center font-weight-normal"></h1>
     <h2 th:text="${subtitle}" class="text-center lead"></h2>
 
+    <p id="skillset"></p>
+
     <div th:each="post : ${posts}" class="my-5">
       <h3 class="font-weight-normal">
         <small class="font-weight-light">
@@ -58,6 +60,10 @@
         cardImpressum.firstElementChild.innerHTML = decodedImpressumString;
       }
     };
+
+    const skillSet = [...document.querySelectorAll('ul.list-inline li')].map(e => e.innerText).reduce((acc, v) => { acc[v] ? acc[v]++ : acc[v] = 1; return acc; }, {});
+    const sortedSkillList = Object.keys(skillSet).sort((a, b) => skillSet[a] > skillSet[b] ? -1 : 1);
+    document.querySelector('#skillset').innerHTML = '<ul class="list-inline text-monospace text-center">' + sortedSkillList.reduce((acc, v) => acc + '<li class="list-inline-item">' + v + '</li>', "") + '</ul>';
   </script>
 </body>
 </html>
