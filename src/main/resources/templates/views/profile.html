@@ -40,8 +40,8 @@
       <ul class="list-unstyled">
         <li th:each="task : ${post.tasks}" th:text="${task}"></li>
       </ul>
-      <ul class="list-inline">
-        <li th:each="tag : ${post.tags}" th:text="${tag}" class="list-inline-item text-monospace"></li>
+      <ul class="list-inline text-monospace">
+        <li th:each="tag : ${post.tags}" th:text="${tag}" class="list-inline-item"></li>
       </ul>
     </div>
 
