@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${title} + ' ' + ${subtitle}"></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <nav class="d-flex justify-content-between">
+          <ul class="breadcrumb bg-transparent">
+            <li class="breadcrumb-item">Tammo Laube</li>
+            <li class="breadcrumb-item active" aria-current="page">Profile</li>
+          </ul>
+          <div class="position-relative">
+            <a id="link-impressum" class="nav-link" href="#">Impressum</a>
+            <div id="card-impressum" class="card position-absolute d-none" style="right:0;">
+              <div th:text="${b64impressum}" class="card-body"></div>
+            </div>
+          </div>
+      </nav>
+    </header>
+    <h1 th:text="${title}" class="text-center font-weight-normal"></h1>
+    <h2 th:text="${subtitle}" class="text-center lead"></h2>
+
+    <div th:each="post : ${posts}" class="my-5">
+      <h3 class="font-weight-normal">
+        <small class="font-weight-light">
+          <time th:text="${post.date}"></time> - <time th:text="${post.dateEnd}"></time>
+          <small th:text="${post.location}" class="font-weight-light"></small>
+        </small>
+        <br>
+        <th:block th:text="${post.title}"></th:block>
+        <small th:text="'at ' + ${post.company}" class="text-muted font-weight-light"></small>
+      </h3>
+      <ul class="list-unstyled">
+        <li th:each="task : ${post.tasks}" th:text="${task}"></li>
+      </ul>
+      <ul class="list-inline">
+        <li th:each="tag : ${post.tags}" th:text="${tag}" class="list-inline-item text-monospace"></li>
+      </ul>
+    </div>
+
+  </div>
+  <script>
+    document.querySelectorAll('time').forEach(time => {
+      time.innerText = new Date(time.innerText).toLocaleDateString();
+    });
+
+    let decodedImpressumString;
+    const cardImpressum = document.querySelector('#card-impressum');
+    document.querySelector('#link-impressum').onclick = ev => {
+      cardImpressum.classList.toggle('d-none');
+      if (!decodedImpressumString) {
+        decodedImpressumString = atob(cardImpressum.firstElementChild.innerText);
+        cardImpressum.firstElementChild.innerHTML = decodedImpressumString;
+      }
+    };
+  </script>
+</body>
+</html>
