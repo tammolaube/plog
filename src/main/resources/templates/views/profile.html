@@ -27,7 +27,7 @@
 
     <p id="skillset"></p>
 
-    <div th:each="post : ${posts}" class="my-5">
+    <div th:each="post : ${posts}" class="my-5" style="break-inside: avoid-page">
       <h3 class="font-weight-normal">
         <small class="font-weight-light">
           <time th:text="${post.date}"></time> - <time th:text="${post.dateEnd}"></time>
