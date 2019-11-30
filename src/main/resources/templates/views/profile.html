@@ -22,6 +22,9 @@
       </nav>
     </header>
     <div class="row justify-content-center">
+      <div class="col-3">
+        <img th:src="${picture}" class="img-fluid rounded-circle d-block mx-auto" alt="Profile Picture" onerror="this.classList.replace('d-block', 'd-none')">
+      </div>
       <div class="col-xl-11" >
         <h1 th:text="${title}" class="text-center font-weight-normal"></h1>
         <h2 th:text="${subtitle}" class="text-center lead"></h2>

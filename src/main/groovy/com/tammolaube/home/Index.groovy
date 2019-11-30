@@ -21,6 +21,7 @@ class Index {
         def plog = new JsonSlurper().parseText(url.text)
         model.addAttribute("title", plog.title)
         model.addAttribute("subtitle", plog.subtitle)
+        model.addAttribute("picture", plog.picture)
         model.addAttribute("b64impressum", plog.b64impressum)
         model.addAttribute("posts", plog.projects.sort{a,b -> b.date <=> a.date})
         "views/profile"
