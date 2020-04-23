@@ -39,7 +39,8 @@
             </small>
             <br>
             <th:block th:text="${post.title}"></th:block>
-            <small th:text="'at ' + ${post.company}" class="text-muted font-weight-light"></small>
+            <small th:unless="${post.companyLink}" th:text="'at ' + ${post.company}" class="text-muted font-weight-light"></small>
+            <a th:if="${post.companyLink}" th:href="@{${post.companyLink}}"><small th:text="'at ' + ${post.company}" class="text-muted font-weight-light"></small></a>
           </h3>
           <ul class="list-unstyled">
             <li th:each="task : ${post.tasks}" th:text="${task}"></li>
